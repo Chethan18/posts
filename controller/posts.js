@@ -34,7 +34,10 @@ exports.createPost = async (req, res) => {
 
 
 exports.getAllPosts = (req, res) => {
-    sql = `SELECT * FROM posts`;
+    let offset = req.query.offset || 0;
+    const limit = 5;
+    sql = `SELECT * FROM posts LIMIT '${limit}' OFFSET '${offset}'`;
+    offset = +offset + limit;
     postsDB.all(sql, [], (err, rows) => {
         if (err) {
             return res.status(500).json({
@@ -43,7 +46,8 @@ exports.getAllPosts = (req, res) => {
         }
 
         res.status(200).json({
-            data: rows
+            offset: parseInt(offset),
+            posts: rows
         });
     });
 }
