@@ -11,7 +11,10 @@ body('user_id').notEmpty(),
 postsController.validateReq,
 postsController.createPost);
 
-router.get('/post',postsController.getAllPosts);
+router.get('/post',
+query('offset').notEmpty(), 
+postsController.validateReq,
+postsController.getAllPosts);
 
 router.get('/post/:postId', 
 param('postId').notEmpty(), 
