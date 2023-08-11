@@ -13,6 +13,6 @@ app.use(bodyParser.json());
 app.use(routes);
 
 
-app.listen(PORT,()=>{
+app.listen(PORT || process.env.PORT,()=>{
     console.log(`Listening on port ${PORT}`);
 });
